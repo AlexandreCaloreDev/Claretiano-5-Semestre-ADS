@@ -1,0 +1,31 @@
+﻿<ion-header
+  ><ion-toolbar
+    ><ion-buttons slot="start"
+      ><ion-back-button defaultHref="/menu"></ion-back-button></ion-buttons
+    ><ion-title>Resumo</ion-title></ion-toolbar
+  ></ion-header
+>
+<ion-content class="ion-padding"
+  ><div>
+    <ion-card
+      ><ion-card-header
+        ><ion-card-title
+          >Total de chamados: {{ chamadosService.listarChamados().length
+          }}</ion-card-title
+        ></ion-card-header
+      ><ion-card-content
+        ><p *ngFor="let item of statusLista">
+          {{ item }}: {{ totalStatus(item) }}
+        </p></ion-card-content
+      ></ion-card
+    ><ion-card
+      ><ion-card-header
+        ><ion-card-title>Por prioridade</ion-card-title></ion-card-header
+      ><ion-card-content
+        ><p *ngFor="let item of prioridades">
+          {{ item }}: {{ totalPrioridade(item) }}
+        </p></ion-card-content
+      ></ion-card
+    >
+  </div></ion-content
+>
