@@ -1,0 +1,59 @@
+﻿@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+ion-toolbar {
+  --background: #eeeeee;
+  --color: #000000;
+}
+
+ion-card {
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid #cccccc;
+}
+
+ion-button {
+  --border-radius: 0;
+  text-transform: none;
+}
+
+ion-item {
+  --highlight-color-focused: #cfcfcf;
+  --highlight-color-valid: #3880ff;
+  --highlight-color-invalid: transparent;
+}
+
+ion-input,
+ion-label,
+ion-textarea,
+ion-select {
+  --highlight-color-focused: #cfcfcf;
+  --highlight-color-valid: #3880ff;
+  --color: #000000;
+}
+
+.ion-valid,
+.ion-touched,
+.ion-focused {
+  --color: #ffffff;
+  --highlight-color: #3880ff;
+}
+
+.erro {
+  display: block;
+  margin: 10px 0;
+  color: red;
+}
+
+.vazio {
+  color: #555555;
+}

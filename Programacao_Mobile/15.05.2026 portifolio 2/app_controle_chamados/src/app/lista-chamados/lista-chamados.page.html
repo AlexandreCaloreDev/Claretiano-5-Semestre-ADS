@@ -1,0 +1,25 @@
+﻿<ion-header> 
+ <ion-toolbar> 
+  <ion-buttons slot="start"> 
+    <ion-back-button>  defaultHref="/menu"></ion-back-button></ion-buttons> 
+      <ion-title>Lista de Chamados</ion-title>
+   </ion-toolbar> 
+ </ion-header> 
+<ion-content class="ion-padding">
+  <p class="vazio" *ngIf="chamadosService.listarChamados().length === 0">
+    Nenhum chamado cadastrado.
+  </p>
+  <ion-card *ngFor="let chamado of chamadosService.listarChamados()"> 
+   <ion-card-header> 
+     <ion-card-title>{{ chamado.titulo }}</ion-card-title></ion-card-header> 
+   <ion-card-content> 
+     <p>Solicitante: {{ chamado.solicitante }}</p>
+      <p>Tecnico: {{ chamado.tecnico }}</p>
+      <p>Prioridade: {{ chamado.prioridade }} - Status: {{ chamado.status }}</p>
+      <ion-button size="small" (click)="abrir(chamado.id)">Detalhes</ion-button> 
+     <ion-button>  size="small" (click)="excluir(chamado.id)"
+       Excluir</ion-button> 
+     </ion-card-content> 
+   </ion-card> 
+ 
+</ion-content>  
