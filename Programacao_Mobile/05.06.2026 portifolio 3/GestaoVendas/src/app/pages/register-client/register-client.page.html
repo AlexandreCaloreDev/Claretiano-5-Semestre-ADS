@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="clientForm" (ngSubmit)="onRegister()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nome Completo</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="clientForm.get('name')?.touched && clientForm.get('name')?.invalid">
+        <p class="error-msg">Nome é obrigatório.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Documento (CPF/CNPJ)</ion-label>
+        <ion-input type="text" inputmode="numeric" formControlName="document" (ionInput)="onDocumentInput($event)" placeholder="000.000.000-00"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="clientForm.get('document')?.touched && clientForm.get('document')?.invalid">
+        <p class="error-msg">Documento é obrigatório.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input type="email" inputmode="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="clientForm.get('email')?.touched && clientForm.get('email')?.invalid">
+        <p class="error-msg">E-mail inválido.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Telefone</ion-label>
+        <ion-input type="tel" inputmode="tel" formControlName="phone" (ionInput)="onPhoneInput($event)" placeholder="(00) 00000-0000"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="clientForm.get('phone')?.touched && clientForm.get('phone')?.invalid">
+        <p class="error-msg">Telefone é obrigatório.</p>
+      </ion-text>
+    </ion-list>
+
+    <div class="ion-margin-top">
+      <ion-button expand="block" type="submit" [disabled]="clientForm.invalid">Cadastrar Cliente</ion-button>
+    </div>
+  </form>
+</ion-content>

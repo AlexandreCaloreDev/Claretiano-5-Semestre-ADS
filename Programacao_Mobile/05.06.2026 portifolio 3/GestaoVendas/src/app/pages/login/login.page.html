@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Gestão de Vendas</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          
+          <ion-item>
+            <ion-label position="floating">Usuário</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')">
+            <p class="error-msg">Usuário é obrigatório.</p>
+          </ion-text>
+
+          <ion-item>
+            <ion-label position="floating">Senha</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')">
+            <p class="error-msg">Senha é obrigatória.</p>
+          </ion-text>
+
+          <div class="ion-margin-top">
+            <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">Entrar</ion-button>
+          </div>
+          <div class="ion-margin-top ion-text-center">
+            <ion-button fill="clear" (click)="goToRegister()">Criar Conta</ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

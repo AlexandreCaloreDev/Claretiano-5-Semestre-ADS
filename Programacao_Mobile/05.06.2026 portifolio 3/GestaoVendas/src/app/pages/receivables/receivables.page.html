@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Contas a Receber</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-list>
+    <ion-item *ngIf="payments.length === 0">
+      <ion-label color="medium">Nenhuma conta registrada.</ion-label>
+    </ion-item>
+    
+    <ion-item *ngFor="let payment of payments">
+      <ion-icon 
+        name="wallet" 
+        slot="start" 
+        [color]="payment.status === 'paid' ? 'success' : 'warning'">
+      </ion-icon>
+      
+      <ion-label>
+        <h2>Venda #{{ payment.saleId.substring(0, 8) }}</h2>
+        <p>Vencimento: {{ payment.dueDate | date:'shortDate' }}</p>
+        <p *ngIf="payment.status === 'paid'">Pago em: {{ payment.paymentDate | date:'shortDate' }}</p>
+      </ion-label>
+
+      <ion-note slot="end" [color]="payment.status === 'paid' ? 'success' : 'danger'">
+        <h2>{{ payment.amount | currency:'BRL' }}</h2>
+        <p>{{ payment.status === 'paid' ? 'Pago' : 'Pendente' }}</p>
+      </ion-note>
+
+      <ion-button 
+        slot="end" 
+        fill="outline" 
+        color="success" 
+        *ngIf="payment.status === 'pending'"
+        (click)="payPayment(payment)">
+        Baixar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

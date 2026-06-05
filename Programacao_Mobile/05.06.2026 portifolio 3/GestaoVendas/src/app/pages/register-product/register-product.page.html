@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="productForm" (ngSubmit)="onRegister()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nome do Produto</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid">
+        <p class="error-msg">Nome é obrigatório (min 3 chars).</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Preço Unitário</ion-label>
+        <ion-input type="text" inputmode="numeric" formControlName="priceFormatted" (ionInput)="onPriceInput($event)" placeholder="R$ 0,00"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="productForm.get('priceFormatted')?.touched && productForm.get('priceFormatted')?.invalid">
+        <p class="error-msg">Preço é obrigatório e maior que 0.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Quantidade em Estoque</ion-label>
+        <ion-input type="text" inputmode="numeric" formControlName="stockQuantity" (ionInput)="onStockInput($event)" placeholder="0"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="productForm.get('stockQuantity')?.touched && productForm.get('stockQuantity')?.invalid">
+        <p class="error-msg">Quantidade é obrigatória.</p>
+      </ion-text>
+    </ion-list>
+
+    <div class="ion-margin-top">
+      <ion-button expand="block" type="submit" [disabled]="productForm.invalid">Cadastrar Produto</ion-button>
+    </div>
+  </form>
+</ion-content>

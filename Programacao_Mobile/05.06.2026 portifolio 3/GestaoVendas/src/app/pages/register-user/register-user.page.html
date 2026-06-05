@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Usuário</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nome de Usuário</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+        <p class="error-msg">Usuário obrigatório (min 3 chars).</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+        <p class="error-msg">E-mail inválido.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+        <p class="error-msg">Senha obrigatória (min 3 chars).</p>
+      </ion-text>
+    </ion-list>
+
+    <div class="ion-margin-top">
+      <ion-button expand="block" type="submit" [disabled]="registerForm.invalid">Cadastrar</ion-button>
+    </div>
+  </form>
+</ion-content>

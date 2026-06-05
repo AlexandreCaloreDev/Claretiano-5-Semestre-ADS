@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Nova Venda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-list>
+    <ion-item>
+      <ion-select label="Cliente" label-placement="floating" [(ngModel)]="selectedClientId">
+        <ion-select-option *ngFor="let client of clients" [value]="client.id">
+          {{ client.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Adicionar Produtos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-select label="Produto" label-placement="floating" [(ngModel)]="selectedProductId">
+          <ion-select-option *ngFor="let product of products" [value]="product.id">
+            {{ product.name }} (R$ {{ product.price | number:'1.2-2' }} - Est: {{ product.stockQuantity }})
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Quantidade</ion-label>
+        <ion-input type="number" [(ngModel)]="quantityToAdd" min="1"></ion-input>
+      </ion-item>
+      <div class="ion-margin-top">
+        <ion-button expand="block" color="secondary" (click)="addProductToSale()">
+          Adicionar à Venda
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <h3 class="ion-padding-start" *ngIf="saleItems.length > 0">Itens da Venda</h3>
+  <ion-list *ngIf="saleItems.length > 0">
+    <ion-item *ngFor="let item of saleItems; let i = index">
+      <ion-label>
+        <h2>{{ getProductName(item.productId) }}</h2>
+        <p>{{ item.quantity }} x R$ {{ item.unitPrice | number:'1.2-2' }}</p>
+      </ion-label>
+      <ion-note slot="end" color="primary">
+        R$ {{ item.totalPrice | number:'1.2-2' }}
+      </ion-note>
+      <ion-button fill="clear" slot="end" color="danger" (click)="removeItem(i)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>
+        <h2><strong>Total da Venda</strong></h2>
+      </ion-label>
+      <ion-note slot="end" color="success">
+        <strong>R$ {{ totalAmount | number:'1.2-2' }}</strong>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngIf="saleItems.length > 0">
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Data de Vencimento</ion-label>
+        <ion-input type="date" [(ngModel)]="paymentDueDate"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="ion-margin-top" *ngIf="saleItems.length > 0">
+    <ion-button expand="block" color="success" (click)="finalizeSale()">Finalizar Venda</ion-button>
+  </div>
+
+</ion-content>

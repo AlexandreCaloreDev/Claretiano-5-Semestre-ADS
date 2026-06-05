@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="4">
+        <ion-card color="primary">
+          <ion-card-header>
+            <ion-card-subtitle>Total de Vendas</ion-card-subtitle>
+            <ion-card-title>{{ totalSales | currency:'BRL' }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-card color="success">
+          <ion-card-header>
+            <ion-card-subtitle>Total Recebido</ion-card-subtitle>
+            <ion-card-title>{{ totalReceived | currency:'BRL' }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-card color="danger">
+          <ion-card-header>
+            <ion-card-subtitle>Total Inadimplente/Pendente</ion-card-subtitle>
+            <ion-card-title>{{ totalPending | currency:'BRL' }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <h2 class="ion-padding-start">Últimas Vendas</h2>
+  <ion-list>
+    <ion-item *ngIf="recentSales.length === 0">
+      <ion-label color="medium">Nenhuma venda registrada.</ion-label>
+    </ion-item>
+    
+    <ion-item *ngFor="let sale of recentSales">
+      <ion-icon name="cart-outline" slot="start" color="primary"></ion-icon>
+      <ion-label>
+        <h2>Venda #{{ sale.id.substring(0, 8) }}</h2>
+        <p>{{ sale.saleDate | date:'short' }}</p>
+      </ion-label>
+      <ion-note slot="end" color="success">
+        {{ sale.totalAmount | currency:'BRL' }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
